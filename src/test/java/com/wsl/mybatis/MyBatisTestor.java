@@ -1,6 +1,7 @@
 package com.wsl.mybatis;
 
 
+import com.wsl.utils.mybatisUtils;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -40,4 +41,18 @@ public class MyBatisTestor {
         }
 
     }
+    @Test
+    public void testMybatisUtils(){
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = mybatisUtils.openSession();
+            Connection connection= sqlSession.getConnection();
+            System.out.println(connection);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            mybatisUtils.closeSession(sqlSession);
+        }
+    }
+
 }
