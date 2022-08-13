@@ -1,6 +1,7 @@
 package com.wsl.mybatis;
 
 
+import com.wsl.mybatis.entity.Goods;
 import com.wsl.utils.mybatisUtils;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -51,6 +52,54 @@ public class MyBatisTestor {
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
+            mybatisUtils.closeSession(sqlSession);
+        }
+    }
+    @Test
+    public void testSelectAll(){
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = mybatisUtils.openSession();
+            List<Goods> list = sqlSession.selectList("goods.selectAll");
+            for (Goods g : list){
+                System.out.println(g.getTitle());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            mybatisUtils.closeSession(sqlSession);
+        }
+    }
+    @Test
+    public void testSelectById(){
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = mybatisUtils.openSession();
+            Goods goods = sqlSession.selectOne("goods.selectById",1222);
+            System.out.println(goods.getTitle());
+//            System.out.println();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            mybatisUtils.closeSession(sqlSession);
+        }
+    }
+    @Test
+    public void testSelectPriceRange(){
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = mybatisUtils.openSession();
+            Map param = new HashMap();
+            param.put("min", 100);
+            param.put("max", 500);
+            param.put("limt", 30);
+            List<Goods> list = sqlSession.selectList("selectByPriceRange",param);
+            for (Goods g : list){
+                System.out.println(g.getTitle() + ":"+g.getCurrentPrice());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
             mybatisUtils.closeSession(sqlSession);
         }
     }

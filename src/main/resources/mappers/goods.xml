@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="goods">
+    <select id="selectById" resultType="com.wsl.mybatis.entity.Goods" parameterType="Integer">
+        select * from t_goods where goods_id = #{value }
+    </select>
+    <select id="selectByPriceRange" resultType="com.wsl.mybatis.entity.Goods" parameterType="java.util.Map">
+        select * from t_goods
+        where current_price between #{min} and #{max}
+        order by current_price
+        limit 0,#{limt}
+    </select>
+</mapper>

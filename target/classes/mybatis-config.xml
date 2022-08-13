@@ -3,10 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-<!--    <settings>-->
-<!--        &lt;!&ndash; goods_id ==> goodsId 驼峰命名转换 &ndash;&gt;-->
-<!--        <setting name="mapUnderscoreToCamelCase" value="true"/>-->
-<!--    </settings>-->
+    <settings>
+        <!-- goods_id ==> goodsId 驼峰命名转换 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
 <!--    &lt;!&ndash;启用Pagehelper分页插件&ndash;&gt;-->
 <!--    <plugins>-->
 <!--        <plugin interceptor="com.github.pagehelper.PageInterceptor">-->
@@ -49,5 +49,7 @@
         </environment>
     </environments>
 
-
+    <mappers>
+        <mapper resource="mappers/goods.xml"/>
+    </mappers>
 </configuration>
